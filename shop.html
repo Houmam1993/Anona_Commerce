@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shop | Anona Jewels</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Jost:wght@400;500&display=swap">
+<link rel="icon" href="favicon.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="site-header"></div>
+
+<main class="wrap" style="padding-top:24px">
+  <nav class="crumb" aria-label="Breadcrumb"><a href="index.html">Home</a> / <span id="crumbName"></span></nav>
+  <div style="margin:18px 0 20px">
+    <h1 class="serif" id="title" style="margin:0;font-size:46px"></h1>
+    <p class="muted" id="intro" style="margin:6px 0 0"></p>
+  </div>
+  <div class="chips" id="chips" style="padding-bottom:20px;border-bottom:1px solid #E8E8E8"></div>
+
+  <div class="layout">
+    <aside class="filters" id="filters" aria-label="Filters">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:12px"><span style="font-weight:500;font-size:15px">Filter</span><button type="button" id="clear" style="background:none;border:0;color:#4A4A4A;cursor:pointer;font-size:13px;text-decoration:underline">Clear all</button></div>
+      <div class="grp"><h3>Price</h3>
+        <label class="ck"><input type="checkbox" name="price" value="u250">Under AED 250</label>
+        <label class="ck"><input type="checkbox" name="price" value="m">AED 250 – 400</label>
+        <label class="ck"><input type="checkbox" name="price" value="o400">Over AED 400</label>
+      </div>
+      <div class="grp"><h3>Stone</h3>
+        <label class="ck"><input type="checkbox" name="stone" value="diamond">Diamond</label>
+        <label class="ck"><input type="checkbox" name="stone" value="sapphire">Lab-created white sapphire</label>
+        <label class="ck"><input type="checkbox" name="stone" value="birthstone">Birthstone &amp; colour stone</label>
+      </div>
+      <div class="grp"><h3>Personalisation</h3>
+        <label class="ck"><input type="checkbox" name="pers" value="name">Name or initials</label>
+        <label class="ck"><input type="checkbox" name="pers" value="birth">Birthstones</label>
+        <label class="ck"><input type="checkbox" name="pers" value="engrave">Engraving</label>
+      </div>
+      <a href="https://create.anonajewels.ae/build-your-piece" style="margin-top:12px;background:#F5F3F0;padding:22px;text-decoration:none;display:flex;flex-direction:column;gap:6px">
+        <span class="serif" style="font-size:22px">Can't find it?</span>
+        <span class="muted" style="font-size:14px">Build your own ring, pendant or earrings.</span>
+        <span style="font-size:13px;text-decoration:underline;margin-top:4px">Start designing</span>
+      </a>
+    </aside>
+
+    <section class="results" aria-label="Products">
+      <div class="toolbar">
+        <div style="display:flex;align-items:center;gap:12px"><button type="button" class="btn ghost filter-toggle" id="ft" style="height:44px;padding:0 18px">Filters</button><span class="muted" id="count"></span></div>
+        <label style="display:flex;align-items:center;gap:10px">Sort by
+          <select id="sort"><option value="feat">Featured</option><option value="lo">Price: low to high</option><option value="hi">Price: high to low</option><option value="az">Name: A–Z</option></select>
+        </label>
+      </div>
+      <div class="grid shop-grid" id="grid"></div>
+      <p id="empty" class="muted" style="display:none;text-align:center;padding:48px 0">No pieces match these filters. <button type="button" id="clear2" style="background:none;border:0;text-decoration:underline;cursor:pointer;font:inherit">Clear filters</button></p>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:48px" id="more">
+        <span class="muted" style="font-size:13px" id="showing"></span>
+        <div style="width:240px;height:2px;background:#E8E8E8"><div id="bar" style="height:2px;background:#111;width:0"></div></div>
+        <button type="button" class="btn ghost" id="loadMore">Load more</button>
+      </div>
+    </section>
+  </div>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="data.js"></script>
+<script src="common.js"></script>
+<script>
+(function () {
+  var A = window.Anona;
+  var qs = new URLSearchParams(location.search);
+  var c = A.CATS[qs.get('c')] ? qs.get('c') : (qs.get('q') || qs.get('wish') ? 'all' : 'rings');
+  var q = (qs.get('q') || '').toLowerCase();
+  var wish = qs.get('wish') === '1';
+  A.mount(q === 'mother' ? 'gifts' : c);
+  var cat = A.CATS[c];
+  var name = wish ? 'Wishlist' : (q && q !== 'mother' && q !== 'couple' ? 'Search: “' + qs.get('q') + '”' : (q === 'mother' ? 'Gifts for Mom' : q === 'couple' ? "Couple's Jewelry" : cat.name));
+  document.title = name + ' | Anona Jewels';
+  document.getElementById('title').textContent = name;
+  document.getElementById('crumbName').textContent = name;
+  document.getElementById('intro').textContent = wish ? 'Pieces you have saved.' : cat.intro;
+
+  var base = A.P.filter(cat.test);
+  if (wish) { var w = A.store.get('wish', []); base = A.P.filter(function (p) { return w.indexOf(p.h) > -1; }); }
+  if (q) base = base.filter(function (p) { return (p.t + ' ' + p.tags.join(' ') + ' ' + p.type).toLowerCase().indexOf(q) > -1; });
+
+  // chips from tags
+  var tagCount = {};
+  base.forEach(function (p) { p.tags.forEach(function (t) { if (/carat|ring$|^signature$/i.test(t) && t.length < 12) return; tagCount[t] = (tagCount[t] || 0) + 1; }); });
+  var tags = Object.keys(tagCount).filter(function (t) { return tagCount[t] > 1; }).sort(function (a, b) { return tagCount[b] - tagCount[a]; });
+  var state = { tag: qs.get('tag') || '', price: qs.get('price') ? [qs.get('price')] : [], stone: [], pers: [], sort: 'feat', limit: 24 };
+  if (state.price.length) document.querySelector('input[name=price][value="' + state.price[0] + '"]').checked = true;
+
+  function chips() {
+    var all = ['All'].concat(tags);
+    document.getElementById('chips').innerHTML = tags.length < 2 ? '' : all.map(function (t) {
+      var v = t === 'All' ? '' : t; var n = t === 'All' ? base.length : tagCount[t];
+      return '<button type="button" data-tag="' + A.esc(v) + '" aria-pressed="' + (state.tag === v) + '">' + A.esc(t) + ' <span style="opacity:.6">' + n + '</span></button>';
+    }).join('');
+  }
+  var priceT = { u250: function (p) { return +p.price < 250; }, m: function (p) { return +p.price >= 250 && +p.price <= 400; }, o400: function (p) { return +p.price > 400; } };
+  var stoneT = { diamond: /diamond/i, sapphire: /sapphire/i, birthstone: /birthstone|color stone|colour stone|gemstone|emerald/i };
+  var persT = { name: function (p) { return /name|initial|signet|letter/i.test(p.t + p.tags.join(' ')); }, birth: function (p) { return /birthstone/i.test(p.t); }, engrave: function (p) { return /engrav|hidden message|personali[sz]e/i.test(p.t + ' ' + p.d); } };
+
+  function run() {
+    var list = base.filter(function (p) {
+      if (state.tag && p.tags.indexOf(state.tag) < 0) return false;
+      if (state.price.length && !state.price.some(function (k) { return priceT[k](p); })) return false;
+      if (state.stone.length && !state.stone.some(function (k) { return stoneT[k].test(p.t + ' ' + p.d); })) return false;
+      if (state.pers.length && !state.pers.some(function (k) { return persT[k](p); })) return false;
+      return true;
+    });
+    if (state.sort === 'lo') list.sort(function (a, b) { return a.price - b.price; });
+    if (state.sort === 'hi') list.sort(function (a, b) { return b.price - a.price; });
+    if (state.sort === 'az') list.sort(function (a, b) { return a.t.localeCompare(b.t); });
+    var shown = list.slice(0, state.limit);
+    document.getElementById('grid').innerHTML = shown.map(function (p) { return A.card(p, { tag: true }); }).join('');
+    document.getElementById('count').textContent = list.length + (list.length === 1 ? ' piece' : ' pieces');
+    document.getElementById('empty').style.display = list.length ? 'none' : 'block';
+    document.getElementById('more').style.display = list.length > shown.length ? 'flex' : (list.length ? 'flex' : 'none');
+    document.getElementById('loadMore').style.display = list.length > shown.length ? 'inline-flex' : 'none';
+    document.getElementById('showing').textContent = 'Showing ' + shown.length + ' of ' + list.length;
+    document.getElementById('bar').style.width = (list.length ? shown.length / list.length * 100 : 0) + '%';
+    chips();
+  }
+
+  document.getElementById('chips').addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; state.tag = b.dataset.tag; state.limit = 24; run(); });
+  document.getElementById('filters').addEventListener('change', function (e) {
+    var n = e.target.name; if (!n) return;
+    state[n] = [].map.call(document.querySelectorAll('input[name=' + n + ']:checked'), function (i) { return i.value; });
+    state.limit = 24; run();
+  });
+  function clear() { [].forEach.call(document.querySelectorAll('.filters input'), function (i) { i.checked = false; }); state.price = []; state.stone = []; state.pers = []; state.tag = ''; run(); }
+  document.getElementById('clear').onclick = clear; document.getElementById('clear2').onclick = clear;
+  document.getElementById('sort').onchange = function (e) { state.sort = e.target.value; run(); };
+  document.getElementById('loadMore').onclick = function () { state.limit += 24; run(); };
+  document.getElementById('ft').onclick = function () { document.getElementById('filters').classList.toggle('open'); };
+  run();
+})();
+</script>
+</body>
+</html>

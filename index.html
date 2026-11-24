@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anona Jewels | Fine &amp; Personalised Jewelry in Dubai</title>
+<meta name="description" content="Rings, necklaces, bracelets and earrings set with diamonds and birthstones, personalised to order. Free insured delivery across the UAE.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Jost:wght@400;500&display=swap">
+<link rel="icon" href="favicon.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="site-header"></div>
+
+<main>
+  <!-- Hero slideshow -->
+  <section class="hero" id="hero" aria-roledescription="carousel" aria-label="Featured">
+    <img class="ph" id="heroImg" src="assets/hero-hand.jpg" alt="">
+    <div class="copy" id="heroCopy">
+      <p class="eyebrow" id="heroKicker"></p>
+      <h1 class="serif" id="heroTitle"></h1>
+      <p class="body" id="heroBody"></p>
+      <div><a class="btn" id="heroCta" href="#"></a></div>
+    </div>
+    <button type="button" class="arrow" style="left:16px" id="heroPrev" aria-label="Previous slide"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.8" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <button type="button" class="arrow" style="right:16px" id="heroNext" aria-label="Next slide"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.8" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+    <div class="dots" id="heroDots"></div>
+  </section>
+
+  <!-- Categories -->
+  <section class="wrap section" aria-labelledby="catH" style="text-align:center">
+    <h2 id="catH" class="serif h2" style="margin-bottom:32px">Shop by category</h2>
+    <div class="circles" id="cats"></div>
+  </section>
+
+  <!-- Build Your Piece -->
+  <section class="wrap section" aria-labelledby="bypH">
+    <div style="border:1px solid #E8E8E8;padding:48px 32px;display:flex;flex-direction:column;align-items:center;gap:30px;text-align:center">
+      <div style="display:flex;flex-direction:column;gap:10px;align-items:center;max-width:620px">
+        <p class="eyebrow">Design it yourself</p>
+        <h2 id="bypH" class="serif h2">Build Your Piece</h2>
+        <p class="muted" style="margin:0;line-height:1.6">Choose your options one step at a time and watch the piece take shape. Send it to us and we'll confirm every detail and the final price at a private consultation.</p>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:20px">
+        <a href="https://create.anonajewels.ae/build-your-piece" style="text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:14px;width:160px"><div style="width:150px;height:150px;border-radius:50%;border:1px solid #E8E8E8;overflow:hidden"><img src="assets/byp-ring.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div>Ring</a>
+        <a href="https://create.anonajewels.ae/build-your-piece" style="text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:14px;width:160px"><div style="width:150px;height:150px;border-radius:50%;border:1px solid #E8E8E8;overflow:hidden"><img src="assets/byp-pendant.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div>Pendant</a>
+        <a href="https://create.anonajewels.ae/build-your-piece" style="text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:14px;width:160px"><div style="width:150px;height:150px;border-radius:50%;border:1px solid #E8E8E8;overflow:hidden"><img src="assets/byp-earrings.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div>Earrings</a>
+        <div aria-disabled="true" style="display:flex;flex-direction:column;align-items:center;gap:14px;width:160px;color:#6B6B6B"><div style="width:150px;height:150px;border-radius:50%;border:1px solid #EFEFEF;background:#FAF8F6;display:flex;align-items:center;justify-content:center"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#C9978A" stroke-width="1.3" aria-hidden="true"><circle cx="12" cy="14" r="6"/><path d="M9.5 8.5L12 5l2.5 3.5"/></svg></div>Bracelets<span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-top:-8px">Coming soon</span></div>
+      </div>
+      <a class="btn" href="https://create.anonajewels.ae/build-your-piece">Start Building</a>
+    </div>
+  </section>
+
+  <!-- Favourites -->
+  <section class="wrap section center" aria-labelledby="favH">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:18px;margin-bottom:32px">
+      <h2 id="favH" class="serif h2">Shop our favourites</h2>
+      <div class="tabs" role="tablist" id="tabs">
+        <button type="button" role="tab" data-tab="best" aria-selected="true">Best sellers</button>
+        <button type="button" role="tab" data-tab="personal" aria-selected="false">Personalised</button>
+        <button type="button" role="tab" data-tab="under" aria-selected="false">Under AED 250</button>
+      </div>
+    </div>
+    <div class="grid" id="favGrid"></div>
+    <div style="display:flex;justify-content:center;margin-top:40px"><a class="btn ghost" href="shop.html?c=all">View all jewelry</a></div>
+  </section>
+
+  <!-- Banners -->
+  <section class="wrap section">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px">
+      <a href="shop.html?c=all&q=mother" style="text-decoration:none;display:flex;flex-direction:column;gap:16px"><div style="aspect-ratio:4/3;overflow:hidden"><img id="giftBanner" alt="Birthstone family necklace" style="width:100%;height:100%;object-fit:cover"></div><div><div class="serif" style="font-size:30px">Personalised gifts</div><div class="muted" style="font-size:14px;margin-top:4px">Names, initials and birthstones · <u>Shop now</u></div></div></a>
+      <a href="shop.html?c=signature" style="text-decoration:none;display:flex;flex-direction:column;gap:16px"><div style="aspect-ratio:4/3;overflow:hidden"><img src="assets/hero-emerald.jpg" alt="Emerald Radiance set worn by a model" style="width:100%;height:100%;object-fit:cover;object-position:center 25%"></div><div><div class="serif" style="font-size:30px">Signature collection</div><div class="muted" style="font-size:14px;margin-top:4px">18K gold and certified diamonds · <u>Shop now</u></div></div></a>
+    </div>
+  </section>
+
+  <!-- Gifts -->
+  <section class="wrap section" aria-labelledby="giftH">
+    <h2 id="giftH" class="serif h2" style="text-align:center;margin-bottom:28px">Find the perfect gift</h2>
+    <div id="priceBands" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-bottom:20px"></div>
+    <div class="circles" id="giftFor" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr))"></div>
+  </section>
+
+  <!-- Bespoke -->
+  <section class="wrap section">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));border:1px solid #E8E8E8">
+      <div style="position:relative;min-height:380px;overflow:hidden"><img src="assets/hero-hand.jpg" alt="Hand wearing stacked diamond rings" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%"></div>
+      <div style="padding:48px;display:flex;flex-direction:column;justify-content:center;gap:16px">
+        <p class="eyebrow">Bespoke</p>
+        <h2 class="serif" style="margin:0;font-size:40px;line-height:1.1">Create something entirely yours</h2>
+        <p class="muted" style="margin:0;font-size:16px;line-height:1.6">Build a ring, pendant or earrings online, or send us a reference and work one-to-one with our Dubai atelier. Most bespoke pieces are ready within 3–4 weeks.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:6px"><a class="btn" href="https://create.anonajewels.ae/build-your-piece">Start Designing</a><a class="btn ghost" href="https://wa.me/971556201515?text=Hello%20Anona%2C%20I%20would%20like%20to%20book%20an%20appointment.">Book an Appointment</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="wrap section" aria-label="Why Anona">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px;text-align:center">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.3" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg><b style="font-weight:500">Free insured delivery</b><span class="muted" style="font-size:14px">Across the UAE</span></div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.3" aria-hidden="true"><path d="M6 3h12l3 5-9 13L3 8z"/><path d="M3 8h18"/></svg><b style="font-weight:500">Certified diamonds</b><span class="muted" style="font-size:14px">IGI &amp; GIA graded</span></div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.3" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><b style="font-weight:500">Lifetime warranty</b><span class="muted" style="font-size:14px">On craftsmanship</span></div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.3" aria-hidden="true"><path d="M20 12a8 8 0 0 1-11.6 7.1L4 20l1-4.2A8 8 0 1 1 20 12z"/></svg><b style="font-weight:500">Expert help</b><span class="muted" style="font-size:14px">On WhatsApp or in our atelier</span></div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="data.js"></script>
+<script src="common.js"></script>
+<script>
+(function () {
+  var A = window.Anona; A.mount('home');
+  var f = function (h) { return A.find(h); };
+
+  // Hero
+  var slides = [
+    { img: 'assets/hero-hand.jpg', pos: 'center 32%', bg: 'linear-gradient(180deg,#9AA8B3 0%,#C2CFD7 55%,#BAC7D0 100%)', fg: '#111111', kc: '#3E4A54', sub: '#2B3036', kicker: 'Fine jewelry · Dubai', title: 'Diamonds,<br>made personal.', body: 'Rings, necklaces and bracelets set with diamonds and birthstones, personalised to order.', cta: 'Shop jewelry', href: 'shop.html?c=all', btn: '' },
+    { img: 'assets/hero-emerald.jpg', pos: 'center 22%', bg: '#17120C', fg: '#FFFFFF', kc: '#D9B7A9', sub: '#E6DED4', kicker: 'Signature collection', title: '18K gold &amp;<br>certified diamonds', body: 'Finished signature pieces, ready to wear.', cta: 'Shop signature', href: 'shop.html?c=signature', btn: 'light' },
+    { img: 'assets/hero-rings.jpg', pos: 'center 45%', bg: 'linear-gradient(180deg,#1C0F09 0%,#4A2317 55%,#2E130B 100%)', fg: '#FFFFFF', kc: '#D9B7A9', sub: '#E6DED4', kicker: 'Build your piece', title: 'Designed by you,<br>made by us.', body: 'Build a ring, pendant or earrings step by step, then confirm every detail with our atelier.', cta: 'Start designing', href: A.BUILDER, btn: 'light' }
+  ];
+  var cur = 0, hero = document.getElementById('hero');
+  var dots = document.getElementById('heroDots');
+  dots.innerHTML = slides.map(function (s, i) { return '<button type="button" data-i="' + i + '" aria-label="Go to slide ' + (i + 1) + '"><span></span></button>'; }).join('');
+  function show(i) {
+    cur = (i + slides.length) % slides.length; var s = slides[cur];
+    hero.style.background = s.bg; hero.style.color = s.fg;
+    var im = document.getElementById('heroImg'); im.src = s.img; im.style.objectPosition = s.pos; im.alt = '';
+    document.getElementById('heroKicker').textContent = s.kicker; document.getElementById('heroKicker').style.color = s.kc;
+    document.getElementById('heroTitle').innerHTML = s.title;
+    var b = document.getElementById('heroBody'); b.textContent = s.body; b.style.color = s.sub;
+    var c = document.getElementById('heroCta'); c.textContent = s.cta; c.href = s.href; c.className = 'btn ' + s.btn;
+    [].forEach.call(dots.children, function (d, k) { d.setAttribute('aria-current', k === cur); });
+  }
+  dots.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) { show(+b.dataset.i); restart(); } });
+  document.getElementById('heroPrev').onclick = function () { show(cur - 1); restart(); };
+  document.getElementById('heroNext').onclick = function () { show(cur + 1); restart(); };
+  var timer; function restart() { clearInterval(timer); timer = setInterval(function () { show(cur + 1); }, 6000); }
+  slides.forEach(function (s) { var i = new Image(); i.src = s.img; });
+  show(0); restart();
+
+  // Categories
+  var cats = [
+    ['rings', 'Rings', '1-10-ct-tw-diamond-stackable-ring'], ['necklaces', 'Necklaces', 'script-initial-heart-necklace-1-5-ct-tw-diamonds-18'],
+    ['bracelets', 'Bracelets', 'sterling-silver-birthstone-tennis-bracelet'], ['earrings', 'Earrings', 'halo-round-birthstone-fashion-stud-earrings'],
+    ['mens', "Men's", 'mens-lab-created-white-sapphire-initial-signet-ring'], ['signature', 'Signature', null]
+  ];
+  document.getElementById('cats').innerHTML = cats.map(function (c) {
+    var p = c[2] && f(c[2]);
+    var im = p ? '<img loading="lazy" src="' + A.img(p.img[0], 400) + '" alt="">' : '<img src="assets/hero-emerald.jpg" alt="" style="object-fit:cover;padding:0;mix-blend-mode:normal">';
+    return '<a href="shop.html?c=' + c[0] + '"><div class="c">' + im + '</div><span>' + c[1] + '</span></a>';
+  }).join('');
+
+  // Favourites tabs
+  var lists = {
+    best: ['birthstone-family-mothers-necklace-1-6-stones', '1-10-ct-tw-diamond-stackable-ring', 'script-initial-heart-necklace-1-5-ct-tw-diamonds-18', 'sterling-silver-birthstone-tennis-bracelet', 'halo-round-birthstone-fashion-stud-earrings', 'couples-birthstone-heart-ring', 'birthstone-butterfly-hidden-message-necklace', 'birthstone-nameplate-necklace'],
+    personal: ['birthstone-nameplate-necklace', 'white-lab-created-sapphire-nameplate-tennis-necklace', 'raised-initials-ring', 'lab-created-white-sapphire-couples-initials-open-ring', 'birthstone-mom-and-baby-feet-necklace-2-stones-and-1-line', 'personalized-lab-created-white-sapphire-initial-bracelet', 'lab-created-white-sapphire-signet-ring', 'engravable-round-disc-and-white-lab-created-sapphire-necklace-1-3-lines'],
+    under: A.P.filter(function (p) { return +p.price < 250; }).sort(function (a, b) { return a.price - b.price; }).slice(0, 8).map(function (p) { return p.h; })
+  };
+  function renderTab(k) {
+    document.getElementById('favGrid').innerHTML = lists[k].map(f).filter(Boolean).map(function (p) { return A.card(p); }).join('');
+    [].forEach.call(document.querySelectorAll('#tabs button'), function (b) { b.setAttribute('aria-selected', b.dataset.tab === k); });
+  }
+  document.getElementById('tabs').addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) renderTab(b.dataset.tab); });
+  renderTab('best');
+
+  // Gift banner image (worn necklace photo from the product)
+  var gp = f('birthstone-family-mothers-necklace-1-6-stones');
+  document.getElementById('giftBanner').src = gp && gp.img[1] ? A.img(gp.img[1], 900) : 'assets/necklaces.jpg';
+
+  // Price bands with live counts
+  var perso = A.P.filter(function (p) { return +p.price < 5000; });
+  var bands = [['u250', 'Under AED 250', function (p) { return +p.price < 250; }], ['m', 'AED 250 – 400', function (p) { return +p.price >= 250 && +p.price <= 400; }], ['o400', 'Over AED 400', function (p) { return +p.price > 400 && +p.price < 5000; }]];
+  var html = bands.map(function (b) { return '<a href="shop.html?c=all&price=' + b[0] + '" style="border:1px solid #E8E8E8;padding:22px;text-decoration:none;display:flex;justify-content:space-between;align-items:center"><span style="font-size:16px">' + b[1] + '</span><span class="muted" style="font-size:13px">' + perso.filter(b[2]).length + ' pieces</span></a>'; }).join('');
+  html += '<a href="shop.html?c=signature" style="border:1px solid #E8E8E8;padding:22px;text-decoration:none;display:flex;justify-content:space-between;align-items:center"><span style="font-size:16px">Signature</span><span class="muted" style="font-size:13px">' + A.P.filter(A.CATS.signature.test).length + ' pieces</span></a>';
+  document.getElementById('priceBands').innerHTML = html;
+
+  var forWho = [['For Her', 'shop.html?c=necklaces', 'birthstone-nameplate-necklace'], ['For Mom', 'shop.html?c=all&q=mother', 'birthstone-mom-and-baby-feet-necklace-2-stones-and-1-line'], ['For Couples', 'shop.html?c=all&q=couple', 'lab-created-white-sapphire-couples-initials-open-ring'], ['For Him', 'shop.html?c=mens', 'mens-lab-created-white-sapphire-initial-signet-ring']];
+  document.getElementById('giftFor').innerHTML = forWho.map(function (g) {
+    var p = f(g[2]); return '<a href="' + g[1] + '"><div class="c" style="border-radius:0">' + (p ? '<img loading="lazy" src="' + A.img(p.img[0], 500) + '" alt="">' : '') + '</div><span>' + g[0] + '</span></a>';
+  }).join('');
+})();
+</script>
+</body>
+</html>

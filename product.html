@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Product | Anona Jewels</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Jost:wght@400;500&display=swap">
+<link rel="icon" href="favicon.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="site-header"></div>
+
+<main class="wrap" style="padding-top:24px" id="pdp"></main>
+
+<div id="site-footer"></div>
+
+<script src="data.js"></script>
+<script src="common.js"></script>
+<script>
+(function () {
+  var A = window.Anona, esc = A.esc;
+  var h = new URLSearchParams(location.search).get('p');
+  var p = A.find(h) || A.P[0];
+  var c = A.catOf(p); A.mount(c);
+  document.title = p.t + ' | Anona Jewels';
+  var cat = A.CATS[c];
+
+  // personalisation rules read from the product title/description
+  var t = p.t, d = p.d || '';
+  var sm = t.match(/\((\d+)(?:\s*-\s*(\d+))?\s*Stones?/i);
+  var fixedStones = /birthstone|color stone|gemstone/i.test(t) && !sm ? 1 : 0;
+  var minS = sm ? +sm[1] : fixedStones, maxS = sm ? +(sm[2] || sm[1]) : fixedStones;
+  var lm = t.match(/(\d+)(?:\s*-\s*(\d+))?\s*Lines?\)/i) || t.match(/and\s+(\d+)\s+(?:Line|Name)/i) || t.match(/\((\d+)\s+Line/i);
+  var maxLines = lm ? +(lm[2] || lm[1]) : (/engrav|hidden message/i.test(t + ' ' + d) ? 1 : 0);
+  var needName = /nameplate|name necklace|name bracelet/i.test(t + ' ' + p.tags.join(' '));
+  var needInitial = /initial|signet|letter/i.test(t) && !needName;
+  var isRing = p.type === 'Rings' || (p.type === 'Mens' && /ring/i.test(t));
+  var months = ['January · Garnet', 'February · Amethyst', 'March · Aquamarine', 'April · Crystal', 'May · Emerald', 'June · Alexandrite', 'July · Ruby', 'August · Peridot', 'September · Sapphire', 'October · Tourmaline', 'November · Citrine', 'December · Blue Topaz'];
+  var st = { img: 0, stones: Math.max(minS, Math.min(maxS, 3)) };
+
+  var thumbs = p.img.map(function (u, i) { return '<button type="button" data-img="' + i + '" aria-label="Show image ' + (i + 1) + '" aria-pressed="' + (i === 0) + '"><img src="' + esc(A.img(u, 200)) + '" alt=""></button>'; }).join('');
+
+  var opts = '';
+  if (maxS > 1) {
+    var pills = ''; for (var n = minS; n <= maxS; n++) pills += '<button type="button" role="radio" data-n="' + n + '" aria-checked="' + (n === st.stones) + '">' + n + '</button>';
+    opts += '<div style="border-top:1px solid #E8E8E8;padding-top:20px;display:flex;flex-direction:column;gap:12px"><span class="opt-label">Number of stones: <b id="nS" style="font-weight:500">' + st.stones + '</b></span><div class="pills" role="radiogroup" aria-label="Number of stones" id="stoneCount">' + pills + '</div></div>';
+  }
+  if (maxS > 0) opts += '<div style="display:flex;flex-direction:column;gap:12px"><span class="opt-label">Choose birthstone' + (maxS > 1 ? 's' : '') + '</span><div class="stone-grid" id="stones"></div></div>';
+  if (needName) opts += '<label style="display:flex;flex-direction:column;gap:8px"><span class="opt-label">Name</span><input class="field" id="nameIn" maxlength="10" placeholder="Up to 10 letters"></label>';
+  if (needInitial) opts += '<label style="display:flex;flex-direction:column;gap:8px"><span class="opt-label">Initial(s)</span><input class="field" id="initIn" maxlength="2" placeholder="e.g. A or AM" style="text-transform:uppercase"></label>';
+  if (maxLines > 0) { var li = ''; for (var k = 1; k <= maxLines; k++) li += '<input class="field engr" maxlength="12" placeholder="Engraving line ' + k + ' (optional)">'; opts += '<div style="display:flex;flex-direction:column;gap:8px"><span class="opt-label">Engraving</span>' + li + '</div>'; }
+  if (isRing) { var sz = ''; ['4', '4.5', '5', '5.5', '6', '6.5', '7', '7.5', '8', '8.5', '9', '9.5', '10', '10.5', '11', '12', '13'].forEach(function (s) { sz += '<option>' + s + '</option>'; }); opts += '<label style="display:flex;flex-direction:column;gap:8px"><span class="opt-label" style="display:flex;justify-content:space-between">Ring size (US) <a href="#" style="text-transform:none;letter-spacing:0;font-size:13px">Size guide</a></span><select id="size" class="field"><option value="">Select your size</option>' + sz + '</select></label>'; }
+
+  var related = A.P.filter(function (x) { return x.h !== p.h && A.catOf(x) === c; }).slice(0, 4);
+
+  document.getElementById('pdp').innerHTML =
+    '<nav class="crumb" aria-label="Breadcrumb"><a href="index.html">Home</a> / <a href="shop.html?c=' + c + '">' + esc(cat.name) + '</a> / <span>' + esc(p.t) + '</span></nav>' +
+    '<div class="pdp">' +
+      '<div class="gallery"><div class="thumbs">' + (p.img.length > 1 ? thumbs : '') + '</div>' +
+        '<div class="main-img"><img id="mainImg" src="' + esc(A.img(p.img[0], 1100)) + '" alt="' + esc(p.t) + '">' +
+        (maxS || needName || needInitial || maxLines ? '<span style="position:absolute;top:16px;left:16px;background:#fff;border:1px solid #E8E8E8;font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:6px 10px">Personalised to order</span>' : '') + '</div></div>' +
+      '<section class="buy" aria-labelledby="pt">' +
+        '<div style="display:flex;flex-direction:column;gap:10px"><span class="tag" style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#6B6B6B">' + esc(A.label(p)) + '</span>' +
+        '<h1 id="pt" class="serif">' + esc(p.t) + '</h1><span style="font-size:22px">' + A.money(p.price) + '</span>' +
+        (d ? '<p class="muted" style="margin:0;font-size:14px;line-height:1.7">' + esc(d) + '</p>' : '') + '</div>' +
+        opts +
+        '<div style="display:flex;flex-direction:column;gap:10px"><button type="button" class="btn" id="add" style="height:56px">Add to bag</button>' +
+        '<a class="btn ghost" id="wa" target="_blank" rel="noopener" style="gap:10px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20 12a8 8 0 0 1-11.6 7.1L4 20l1-4.2A8 8 0 1 1 20 12z"/></svg>Order or ask on WhatsApp</a></div>' +
+        '<div class="perks"><span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.3" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg>Free insured UAE delivery</span><span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.3" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>Lifetime craftsmanship warranty</span></div>' +
+        '<div style="border-top:1px solid #E8E8E8">' +
+          '<details open><summary>Details</summary><div class="dbody">' + esc(A.label(p)) + (maxS ? ' · ' + (minS === maxS ? maxS : minS + '–' + maxS) + ' birthstone' + (maxS > 1 ? 's' : '') + ' of your choice' : '') + (maxLines ? ' · engravable' : '') + '. Made to order with your selections.</div></details>' +
+          '<details><summary>Delivery &amp; returns</summary><div class="dbody">Free insured delivery across the UAE. [Delivery time and returns policy for personalised pieces to be confirmed.]</div></details>' +
+          '<details><summary>Jewelry care</summary><div class="dbody">[Care instructions to be added.]</div></details>' +
+        '</div>' +
+      '</section>' +
+    '</div>' +
+    (related.length ? '<section class="section center" aria-labelledby="rel" style="padding-top:88px"><h2 id="rel" class="serif" style="margin:0 0 28px;font-size:34px;text-align:center">You may also like</h2><div class="grid">' + related.map(function (x) { return A.card(x); }).join('') + '</div></section>' : '');
+
+  function renderStones() {
+    var el = document.getElementById('stones'); if (!el) return;
+    var prev = [].map.call(el.querySelectorAll('select'), function (s) { return s.value; });
+    var html = ''; for (var i = 0; i < st.stones; i++) html += '<label>Stone ' + (i + 1) + '<select class="field">' + months.map(function (m) { return '<option' + (prev[i] === m ? ' selected' : '') + '>' + m + '</option>'; }).join('') + '</select></label>';
+    el.innerHTML = html;
+  }
+  renderStones();
+  var sc = document.getElementById('stoneCount');
+  if (sc) sc.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; st.stones = +b.dataset.n; document.getElementById('nS').textContent = st.stones; [].forEach.call(sc.children, function (x) { x.setAttribute('aria-checked', x === b); }); renderStones(); });
+  var th = document.querySelector('.thumbs');
+  th.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; var i = +b.dataset.img; document.getElementById('mainImg').src = A.img(p.img[i], 1100); [].forEach.call(th.children, function (x) { x.setAttribute('aria-pressed', x === b); }); });
+
+  function summary() {
+    var parts = [p.t + ' (' + A.money(p.price) + ')'];
+    var s = document.querySelectorAll('#stones select'); if (s.length) parts.push('Stones: ' + [].map.call(s, function (x) { return x.value.split(' · ')[1]; }).join(', '));
+    var n = document.getElementById('nameIn'); if (n && n.value) parts.push('Name: ' + n.value);
+    var ini = document.getElementById('initIn'); if (ini && ini.value) parts.push('Initials: ' + ini.value.toUpperCase());
+    var e = [].map.call(document.querySelectorAll('.engr'), function (x) { return x.value; }).filter(Boolean); if (e.length) parts.push('Engraving: ' + e.join(' / '));
+    var z = document.getElementById('size'); if (z && z.value) parts.push('Ring size: ' + z.value);
+    return parts;
+  }
+  var wa = document.getElementById('wa');
+  function updWa() { wa.href = A.WA + '?text=' + encodeURIComponent('Hello Anona, I would like to order:\n' + summary().join('\n') + '\n' + location.href); }
+  document.getElementById('pdp').addEventListener('input', updWa); document.getElementById('pdp').addEventListener('click', function () { setTimeout(updWa, 0); }); updWa();
+  document.getElementById('add').onclick = function () {
+    var z = document.getElementById('size'); if (z && !z.value) { z.focus(); A.toast('Please choose your ring size'); return; }
+    A.addToBag(p); this.textContent = 'Added to bag ✓';
+  };
+})();
+</script>
+</body>
+</html>
