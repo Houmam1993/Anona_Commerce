@@ -77,7 +77,7 @@
         '</div>' +
       '</section>' +
     '</div>' +
-    (related.length ? '<section class="section center" aria-labelledby="rel" style="padding-top:88px"><h2 id="rel" class="serif" style="margin:0 0 28px;font-size:34px;text-align:center">You may also like</h2><div class="grid">' + related.map(function (x) { return A.card(x); }).join('') + '</div></section>' : '');
+    (related.length ? '<section class="section center" aria-labelledby="rel" style="padding-top:88px"><h2 id="rel" class="serif" style="margin:0 0 28px;font-size:34px;text-align:center">You may also like</h2><div class="grid four">' + related.map(function (x) { return A.card(x); }).join('') + '</div></section>' : '');
 
   function renderStones() {
     var el = document.getElementById('stones'); if (!el) return;

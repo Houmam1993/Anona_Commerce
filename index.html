@@ -42,22 +42,16 @@
     <div class="circles" id="cats"></div>
   </section>
 
-  <!-- Build Your Piece -->
-  <section class="wrap section" aria-labelledby="bypH">
-    <div style="border:1px solid #E8E8E8;padding:48px 32px;display:flex;flex-direction:column;align-items:center;gap:30px;text-align:center">
-      <div style="display:flex;flex-direction:column;gap:10px;align-items:center;max-width:620px">
-        <p class="eyebrow">Design it yourself</p>
-        <h2 id="bypH" class="serif h2">Build Your Piece</h2>
-        <p class="muted" style="margin:0;line-height:1.6">Choose your options one step at a time and watch the piece take shape. Send it to us and we'll confirm every detail and the final price at a private consultation.</p>
+  <!-- Build Your Piece banner -->
+  <section class="section" aria-labelledby="bypH">
+    <a class="banner" href="https://create.anonajewels.ae/build-your-piece">
+      <img src="assets/bespoke-banner.jpg" alt="" loading="lazy">
+      <div class="banner-copy wrap">
+        <h2 id="bypH" class="serif">Build Your Piece</h2>
+        <p>Design your own ring, pendant or earrings one step at a time, then confirm every detail and the final price with our Dubai atelier.</p>
+        <span class="banner-link">Build your piece</span>
       </div>
-      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:20px">
-        <a href="https://create.anonajewels.ae/build-your-piece" style="text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:14px;width:160px"><div style="width:150px;height:150px;border-radius:50%;border:1px solid #E8E8E8;overflow:hidden"><img src="assets/byp-ring.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div>Ring</a>
-        <a href="https://create.anonajewels.ae/build-your-piece" style="text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:14px;width:160px"><div style="width:150px;height:150px;border-radius:50%;border:1px solid #E8E8E8;overflow:hidden"><img src="assets/byp-pendant.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div>Pendant</a>
-        <a href="https://create.anonajewels.ae/build-your-piece" style="text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:14px;width:160px"><div style="width:150px;height:150px;border-radius:50%;border:1px solid #E8E8E8;overflow:hidden"><img src="assets/byp-earrings.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div>Earrings</a>
-        <div aria-disabled="true" style="display:flex;flex-direction:column;align-items:center;gap:14px;width:160px;color:#6B6B6B"><div style="width:150px;height:150px;border-radius:50%;border:1px solid #EFEFEF;background:#FAF8F6;display:flex;align-items:center;justify-content:center"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#C9978A" stroke-width="1.3" aria-hidden="true"><circle cx="12" cy="14" r="6"/><path d="M9.5 8.5L12 5l2.5 3.5"/></svg></div>Bracelets<span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-top:-8px">Coming soon</span></div>
-      </div>
-      <a class="btn" href="https://create.anonajewels.ae/build-your-piece">Start Building</a>
-    </div>
+    </a>
   </section>
 
   <!-- Favourites -->
@@ -70,7 +64,7 @@
         <button type="button" role="tab" data-tab="under" aria-selected="false">Under AED 250</button>
       </div>
     </div>
-    <div class="grid" id="favGrid"></div>
+    <div class="grid four" id="favGrid"></div>
     <div style="display:flex;justify-content:center;margin-top:40px"><a class="btn ghost" href="shop.html?c=all">View all jewelry</a></div>
   </section>
 
@@ -85,21 +79,8 @@
   <!-- Gifts -->
   <section class="wrap section" aria-labelledby="giftH">
     <h2 id="giftH" class="serif h2" style="text-align:center;margin-bottom:28px">Find the perfect gift</h2>
-    <div id="priceBands" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-bottom:20px"></div>
-    <div class="circles" id="giftFor" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr))"></div>
-  </section>
-
-  <!-- Bespoke -->
-  <section class="wrap section">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));border:1px solid #E8E8E8">
-      <div style="position:relative;min-height:380px;overflow:hidden"><img src="assets/hero-hand.jpg" alt="Hand wearing stacked diamond rings" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%"></div>
-      <div style="padding:48px;display:flex;flex-direction:column;justify-content:center;gap:16px">
-        <p class="eyebrow">Bespoke</p>
-        <h2 class="serif" style="margin:0;font-size:40px;line-height:1.1">Create something entirely yours</h2>
-        <p class="muted" style="margin:0;font-size:16px;line-height:1.6">Build a ring, pendant or earrings online, or send us a reference and work one-to-one with our Dubai atelier. Most bespoke pieces are ready within 3–4 weeks.</p>
-        <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:6px"><a class="btn" href="https://create.anonajewels.ae/build-your-piece">Start Designing</a><a class="btn ghost" href="https://wa.me/971556201515?text=Hello%20Anona%2C%20I%20would%20like%20to%20book%20an%20appointment.">Book an Appointment</a></div>
-      </div>
-    </div>
+    <div id="priceBands" class="bands"></div>
+    <div class="circles squares" id="giftFor"></div>
   </section>
 
   <!-- Values -->
@@ -182,13 +163,13 @@
   // Price bands with live counts
   var perso = A.P.filter(function (p) { return +p.price < 5000; });
   var bands = [['u250', 'Under AED 250', function (p) { return +p.price < 250; }], ['m', 'AED 250 – 400', function (p) { return +p.price >= 250 && +p.price <= 400; }], ['o400', 'Over AED 400', function (p) { return +p.price > 400 && +p.price < 5000; }]];
-  var html = bands.map(function (b) { return '<a href="shop.html?c=all&price=' + b[0] + '" style="border:1px solid #E8E8E8;padding:22px;text-decoration:none;display:flex;justify-content:space-between;align-items:center"><span style="font-size:16px">' + b[1] + '</span><span class="muted" style="font-size:13px">' + perso.filter(b[2]).length + ' pieces</span></a>'; }).join('');
-  html += '<a href="shop.html?c=signature" style="border:1px solid #E8E8E8;padding:22px;text-decoration:none;display:flex;justify-content:space-between;align-items:center"><span style="font-size:16px">Signature</span><span class="muted" style="font-size:13px">' + A.P.filter(A.CATS.signature.test).length + ' pieces</span></a>';
+  var html = bands.map(function (b) { return '<a href="shop.html?c=all&price=' + b[0] + '"><span style="font-size:16px">' + b[1] + '</span><span class="muted" style="font-size:13px">' + perso.filter(b[2]).length + ' pieces</span></a>'; }).join('');
+  html += '<a href="shop.html?c=signature"><span style="font-size:16px">Signature</span><span class="muted" style="font-size:13px">' + A.P.filter(A.CATS.signature.test).length + ' pieces</span></a>';
   document.getElementById('priceBands').innerHTML = html;
 
   var forWho = [['For Her', 'shop.html?c=necklaces', 'birthstone-nameplate-necklace'], ['For Mom', 'shop.html?c=all&q=mother', 'birthstone-mom-and-baby-feet-necklace-2-stones-and-1-line'], ['For Couples', 'shop.html?c=all&q=couple', 'lab-created-white-sapphire-couples-initials-open-ring'], ['For Him', 'shop.html?c=mens', 'mens-lab-created-white-sapphire-initial-signet-ring']];
   document.getElementById('giftFor').innerHTML = forWho.map(function (g) {
-    var p = f(g[2]); return '<a href="' + g[1] + '"><div class="c" style="border-radius:0">' + (p ? '<img loading="lazy" src="' + A.img(p.img[0], 500) + '" alt="">' : '') + '</div><span>' + g[0] + '</span></a>';
+    var p = f(g[2]); return '<a href="' + g[1] + '"><div class="c">' + (p ? '<img loading="lazy" src="' + A.img(p.img[0], 500) + '" alt="">' : '') + '</div><span>' + g[0] + '</span></a>';
   }).join('');
 })();
 </script>

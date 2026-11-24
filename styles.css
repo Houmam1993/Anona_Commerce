@@ -56,6 +56,10 @@ button{font-family:inherit}
 .card .wish.on svg{fill:#8A5A4C;stroke:#8A5A4C}
 .center .card>a{text-align:center}
 .shop-grid{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+.grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.bands{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin:0 auto 28px;max-width:1112px}
+.bands a{border:1px solid #E8E8E8;padding:22px;text-decoration:none;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.bands a:hover{border-color:#111;color:#111}
 
 /* hero */
 .hero{position:relative;height:640px;overflow:hidden;transition:background .6s}
@@ -77,8 +81,22 @@ button{font-family:inherit}
 .home .hero .dots{bottom:17%}
 .home .hero .arrow{top:calc(50% + var(--hh, 118px) * .0)}
 
+/* full-width banner */
+.banner{position:relative;display:block;height:620px;overflow:hidden;color:#fff;text-decoration:none}
+.banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 50%;transition:transform 1.2s ease}
+.banner:hover img{transform:scale(1.03)}
+.banner::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(18,10,6,.82) 0%,rgba(18,10,6,.55) 38%,rgba(18,10,6,0) 68%)}
+.banner-copy{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;justify-content:center;gap:16px}
+.banner-copy h2{margin:0;font-size:52px;line-height:1.05}
+.banner-copy p{margin:0;max-width:440px;font-size:16px;line-height:1.7;color:#F1EAE3}
+.banner-link{align-self:flex-start;margin-top:6px;font-size:14px;letter-spacing:.12em;text-transform:uppercase;border-bottom:1px solid #fff;padding-bottom:4px}
+.banner:hover .banner-link{color:#fff;border-bottom-width:2px}
+
 /* circles */
-.circles{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:24px;text-align:center}
+.circles{display:flex;flex-wrap:wrap;justify-content:center;gap:28px 24px;text-align:center}
+.circles>a{flex:0 1 190px}
+.circles.squares>a{flex:0 1 260px}
+.circles.squares .c{border-radius:0}
 .circles a{text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:14px}
 .circles .c{width:100%;aspect-ratio:1;border-radius:50%;background:#F5F3F0;overflow:hidden}
 .circles .c img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;padding:14px}
@@ -161,6 +179,10 @@ details .dbody{padding:0 0 18px;font-size:14px;line-height:1.7;color:#4A4A4A}
   .home .hero{margin-top:0;height:auto;min-height:620px;clip-path:none}
   .home .hero .copy{padding-top:32px}
   .home .hero .dots{bottom:24px}
+  .banner{height:480px}
+  .banner::after{background:linear-gradient(0deg,rgba(18,10,6,.85) 0%,rgba(18,10,6,.4) 55%,rgba(18,10,6,0) 85%)}
+  .banner-copy{justify-content:flex-end;padding-bottom:36px}
+  .banner-copy h2{font-size:38px}
   .hero{height:auto;min-height:620px;display:flex;flex-direction:column-reverse}
   .hero img.ph{position:relative;width:100%;height:340px;-webkit-mask-image:linear-gradient(0deg,#000 75%,transparent);mask-image:linear-gradient(0deg,#000 75%,transparent)}
   .hero .copy{padding:32px 20px 64px;height:auto}
@@ -174,7 +196,12 @@ details .dbody{padding:0 0 18px;font-size:14px;line-height:1.7;color:#4A4A4A}
   .thumbs{flex-direction:row;flex:none}
   .h2{font-size:32px}
   .grid,.shop-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 14px}
-  .circles{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:16px}
+  .circles{gap:20px 14px}
+  .circles>a{flex:0 1 calc((100% - 28px) / 3)}
+  .circles.squares>a{flex:0 1 calc((100% - 14px) / 2)}
+  .grid.four{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .bands{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .bands a{flex-direction:column;align-items:flex-start;gap:4px;padding:16px}
   .logo img{height:34px}
   .card .img img{padding:10px}
 }
