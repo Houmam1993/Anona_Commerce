@@ -11,7 +11,14 @@
 <link rel="icon" href="favicon.png">
 <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="home">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <clipPath id="heroClip" clipPathUnits="objectBoundingBox">
+      <path d="M0,0.34 C0,0.2 0.07,0.145 0.19,0.145 L0.79,0.145 C0.93,0.145 1,0.085 1,0 L1,0.8 C1,0.835 0.975,0.855 0.935,0.855 L0.2,0.855 C0.075,0.855 0,0.91 0,1 Z"/>
+    </clipPath>
+  </defs>
+</svg>
 <div id="site-header"></div>
 
 <main>
@@ -113,6 +120,8 @@
 <script>
 (function () {
   var A = window.Anona; A.mount('home');
+  function hh() { var h = document.querySelector('.site-head'); if (h) document.documentElement.style.setProperty('--hh', h.offsetHeight + 'px'); }
+  hh(); window.addEventListener('resize', hh); if (document.fonts) document.fonts.ready.then(hh);
   var f = function (h) { return A.find(h); };
 
   // Hero
