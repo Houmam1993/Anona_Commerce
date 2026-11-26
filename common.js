@@ -16,7 +16,7 @@
 
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
   function money(v) { var n = +v; return 'AED ' + (n >= 1000 ? n.toLocaleString('en-US', { maximumFractionDigits: 0 }) : n.toFixed(2)); }
-  function img(u, w) { return u ? u + (u.indexOf('?') > -1 ? '&' : '?') + 'width=' + (w || 600) : ''; }
+  function img(u, w) { if (!u) return ''; if (u.indexOf('p/') === 0) return 'assets/' + (w && w <= 600 ? 'p/s/' : 'p/') + u.slice(2) + '.jpg'; return u + (u.indexOf('?') > -1 ? '&' : '?') + 'width=' + (w || 600); }
   function find(h) { for (var i = 0; i < P.length; i++) if (P[i].h === h) return P[i]; return null; }
   function catOf(p) { if (+p.price >= 5000) return 'signature'; return { Rings: 'rings', Necklaces: 'necklaces', Bracelets: 'bracelets', Earrings: 'earrings', Mens: 'mens' }[p.type] || 'all'; }
   function label(p) { return (p.tags && p.tags[0]) ? p.tags[0].replace(/^Fashion /, '') : p.type; }

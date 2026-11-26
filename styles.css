@@ -47,7 +47,7 @@ button{font-family:inherit}
 .card{position:relative}
 .card>a{text-decoration:none;display:flex;flex-direction:column;gap:12px}
 .card .img{aspect-ratio:1;border:1px solid #F0F0F0;overflow:hidden;background:#fff}
-.card .img img{width:100%;height:100%;object-fit:contain;padding:16px;transition:transform .4s ease}
+.card .img img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
 .card:hover .img img{transform:scale(1.04)}
 .card .tag{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#6B6B6B}
 .card .t{font-size:15px;line-height:1.4}
@@ -99,7 +99,7 @@ button{font-family:inherit}
 .circles.squares .c{border-radius:0}
 .circles a{text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:14px}
 .circles .c{width:100%;aspect-ratio:1;border-radius:50%;background:#F5F3F0;overflow:hidden}
-.circles .c img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;padding:14px}
+.circles .c img{width:100%;height:100%;object-fit:cover;mix-blend-mode:multiply;padding:8%}
 
 /* tabs, chips */
 .tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:28px}
@@ -122,12 +122,12 @@ select{height:44px;border:1px solid #D0D0D0;padding:0 12px;font:inherit;font-siz
 
 /* product page */
 .pdp{display:flex;flex-wrap:wrap;gap:56px;margin-top:24px}
-.gallery{flex:1 1 520px;min-width:0;display:flex;gap:16px}
+.gallery{flex:1 1 520px;min-width:0;display:flex;gap:16px;align-self:flex-start;position:sticky;top:20px}
 .thumbs{display:flex;flex-direction:column;gap:12px;flex:0 0 84px}
 .thumbs button{width:84px;height:84px;padding:0;border:1px solid #E8E8E8;background:#fff;cursor:pointer;overflow:hidden}
 .thumbs button[aria-pressed=true]{border-color:#111}
 .thumbs img{width:100%;height:100%;object-fit:cover}
-.main-img{flex:1;min-width:0;aspect-ratio:1;border:1px solid #F0F0F0;overflow:hidden;position:relative;background:#fff}
+.main-img{flex:1;min-width:0;aspect-ratio:1;align-self:flex-start;border:1px solid #F0F0F0;overflow:hidden;position:relative;background:#fff}
 .main-img img{width:100%;height:100%;object-fit:contain}
 .buy{flex:1 1 400px;max-width:520px;display:flex;flex-direction:column;gap:22px}
 .buy h1{margin:0;font-size:38px;line-height:1.1}
@@ -232,7 +232,6 @@ body.lock{overflow:hidden}
   .card .t{font-size:14px}
   .card .p{font-size:14px}
   .card .tag{font-size:11px}
-  .card .img img{padding:10px}
   .duo{gap:32px!important}
   .bands{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
   .bands a{flex-direction:column;align-items:flex-start;gap:4px;padding:16px}
@@ -264,7 +263,8 @@ body.lock{overflow:hidden}
   /* product page */
   .crumb{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .pdp{gap:28px;margin-top:16px}
-  .gallery{flex-direction:column-reverse;flex-basis:100%;gap:10px}
+  .gallery{flex-direction:column-reverse;flex-basis:100%;gap:10px;position:static}
+  .main-img{width:100%;flex:none}
   .thumbs{flex-direction:row;flex:none;overflow-x:auto}
   .thumbs button{width:68px;height:68px;flex:none}
   .buy{max-width:100%;flex-basis:100%;gap:20px}
@@ -279,3 +279,4 @@ body.lock{overflow:hidden}
   .news input{font-size:16px}
 }
 #initIn::placeholder{text-transform:none}
+.thumbs:empty{display:none}
